@@ -24,5 +24,10 @@ RUN apk add --no-cache openssh sshpass && \
     apk del curl && \
     rm -rf /var/cache/apk/*
 
+# Lazy hack to add docker group
+RUN delgroup $(getent group 999 | cut -d: -f1) && \
+    addgroup -g 999 docker && \
+    addgroup jenkins docker
+
 # Switch back to jenkins user
 USER jenkins
