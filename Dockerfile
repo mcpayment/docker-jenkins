@@ -21,6 +21,7 @@ RUN apk add --no-cache openssh sshpass && \
     pip install awscli && \
     \
     \
+    apk upgrade && \
     rm -rf /var/cache/apk/*
 
 # Lazy hack to add docker group
