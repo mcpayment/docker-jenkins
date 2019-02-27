@@ -21,7 +21,10 @@ RUN apk add --no-cache openssh sshpass && \
     pip install awscli && \
     \
     \
-    apk --update add jq maven ansible && \
+    apk --update add jq maven && \
+    \
+    \
+    apk --update add ansible && \
     \
     \
     apk upgrade && \
@@ -34,3 +37,6 @@ RUN delgroup $(getent group 999 | cut -d: -f1) && \
 
 # Switch back to jenkins user
 USER jenkins
+
+# Install additional ansible dependencies in jenkins home
+RUN pip install --user boto boto3
