@@ -8,3 +8,4 @@ Simple jenkins master server which by default includes our pipeline requirements
 * sshpass
 * jq
 * maven
+* ansible

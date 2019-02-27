@@ -5,7 +5,7 @@ USER root
 
 ENV DOCKER_DL_URL="https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz"
 
-# Install sshpass, docker-client, awscli, curl, jq, maven
+# Install sshpass, docker-client, awscli, curl, jq, maven, ansible
 # then cleanup
 RUN apk add --no-cache openssh sshpass && \
     \
@@ -21,7 +21,7 @@ RUN apk add --no-cache openssh sshpass && \
     pip install awscli && \
     \
     \
-    apk --update add jq maven && \
+    apk --update add jq maven ansible && \
     \
     \
     apk upgrade && \
