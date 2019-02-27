@@ -6,3 +6,5 @@ Simple jenkins master server which by default includes our pipeline requirements
 * aws-cli
 * docker-cli
 * sshpass
+* jq
+* maven
