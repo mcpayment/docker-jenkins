@@ -5,7 +5,7 @@ USER root
 
 ENV DOCKER_DL_URL="https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz"
 
-# Install sshpass, docker-client, awscli
+# Install sshpass, docker-client, awscli, curl
 # then cleanup
 RUN apk add --no-cache openssh sshpass && \
     \
@@ -21,7 +21,6 @@ RUN apk add --no-cache openssh sshpass && \
     pip install awscli && \
     \
     \
-    apk del curl && \
     rm -rf /var/cache/apk/*
 
 # Lazy hack to add docker group
