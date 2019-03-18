@@ -27,7 +27,6 @@ RUN apk add --no-cache openssh sshpass && \
     apk --update add ansible && \
     \
     \
-    apk upgrade && \
     rm -rf /var/cache/apk/*
 
 # Lazy hack to add docker group
