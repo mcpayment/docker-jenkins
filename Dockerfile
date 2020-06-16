@@ -15,7 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get clean
 
 RUN pip3 install --upgrade pip cffi && \
-    pip install awscli ansible && \
+    pip install awscli boto boto3 ansible && \
     pip install mitogen ansible-lint && \
     pip install --upgrade pywinrm
 
@@ -25,6 +25,3 @@ RUN addgroup --gid 999 docker && \
 
 # Switch back to jenkins user
 USER jenkins
-
-# Install additional ansible dependencies in jenkins home
-RUN pip install --user boto boto3
