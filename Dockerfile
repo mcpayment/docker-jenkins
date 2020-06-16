@@ -1,37 +1,21 @@
-FROM jenkins/jenkins:lts-alpine
+FROM jenkins/jenkins:2.222.1-jdk11
 
 # Switch to root in order to install dependencies
 USER root
 
-ENV DOCKER_DL_URL="https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz"
+ENV DOCKER_DL_URL="https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz"
 
-# Install sshpass, docker-client, awscli, curl, jq, maven, ansible
-# then cleanup
-RUN apk add --no-cache openssh sshpass && \
-    \
-    \
-    apk --update add curl && \
-    mkdir -p /tmp/download && \
-    curl -L $DOCKER_DL_URL | tar -xz -C /tmp/download && \
-    mv /tmp/download/docker/docker /usr/local/bin/ && \
-    rm -rf /tmp/download && \
-    \
-    \
-    apk --update add groff less python py-pip && \
-    pip install awscli && \
-    \
-    \
-    apk --update add jq maven && \
-    \
-    \
-    apk --update add ansible && \
-    \
-    \
-    rm -rf /var/cache/apk/*
+RUN apt-get update && \
+	apt-get install -y curl openssh-client sshpass groff less python python-pip jq maven ansible && \
+	mkdir -p /tmp/download && \
+	curl -L $DOCKER_DL_URL | tar -xz -C /tmp/download && \
+	mv /tmp/download/docker/docker /usr/local/bin/ && \
+	rm -rf /tmp/download && \
+	pip install awscli && \
+	rm -rf /var/cache/apk/*
 
 # Lazy hack to add docker group
-RUN delgroup $(getent group 999 | cut -d: -f1) && \
-    addgroup -g 999 docker && \
+RUN addgroup --gid 999 docker && \
     addgroup jenkins docker
 
 # Switch back to jenkins user
